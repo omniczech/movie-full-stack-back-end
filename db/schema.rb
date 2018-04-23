@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 20180423131955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "examples", force: :cascade do |t|
     t.text "text", null: false
@@ -21,6 +32,18 @@ ActiveRecord::Schema.define(version: 2) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_examples_on_user_id"
+  end
+
+  create_table "movie_ratings", force: :cascade do |t|
+    t.string "movie_title"
+    t.string "movie_genre"
+    t.integer "rating"
+    t.date "date_watched"
+    t.string "review"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_movie_ratings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,4 +57,5 @@ ActiveRecord::Schema.define(version: 2) do
   end
 
   add_foreign_key "examples", "users"
+  add_foreign_key "movie_ratings", "users"
 end
