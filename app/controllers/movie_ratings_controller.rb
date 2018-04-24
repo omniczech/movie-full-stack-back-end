@@ -8,6 +8,12 @@ class MovieRatingsController < OpenReadController
     render json: @movie_ratings
   end
 
+  def index_user
+    @movie_ratings = current_user.movie_ratings.all
+
+    render json: @movie_ratings
+  end
+
   # GET /movie_ratings/1
   def show
     render json: @movie_rating
