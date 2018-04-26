@@ -47,7 +47,7 @@ class MovieRatingsController < OpenReadController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie_rating
-      @movie_rating = MovieRating.find(params[:id])
+      @movie_rating = current_user.movie_ratings.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
